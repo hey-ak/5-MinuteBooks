@@ -9,7 +9,6 @@ import {
 } from "@getmocha/users-service/backend";
 import { DatabaseManager } from "@/shared/database";
 import { createDatabaseEndpoints } from "./database-endpoints";
-import type { Env } from "../../worker-configuration";
 
 const app = new Hono<{ Bindings: Env }>();
 
