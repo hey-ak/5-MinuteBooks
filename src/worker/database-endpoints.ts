@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { DatabaseManager } from "@/shared/database";
+import type { DatabaseManager } from "@/shared/database";
 
 export function createDatabaseEndpoints(getDbManager: () => Promise<DatabaseManager>) {
   const app = new Hono();

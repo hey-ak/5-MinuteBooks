@@ -7,7 +7,8 @@ import {
   deleteSession,
   MOCHA_SESSION_TOKEN_COOKIE_NAME,
 } from "@getmocha/users-service/backend";
-import { DatabaseManager } from "@/shared/database";
+import { createDatabaseManager } from "@/shared/database-factory";
+import type { DatabaseManager } from "@/shared/database";
 import { createDatabaseEndpoints } from "./database-endpoints";
 
 const app = new Hono<{ Bindings: Env }>();
@@ -15,9 +16,20 @@ const app = new Hono<{ Bindings: Env }>();
 // Database connection
 let dbManager: DatabaseManager | null = null;
 
-async function getDbManager(): Promise<DatabaseManager> {
+async function getDbManager(env?: any): Promise<DatabaseManager> {
   if (!dbManager) {
-    dbManager = new DatabaseManager();
+    // Determine which database to use based on environment
+    const usePostgres = env?.DATABASE_URL && env.USE_POSTGRES === 'true';
+    
+    if (usePostgres) {
+      dbManager = createDatabaseManager({
+        type: 'postgres',
+        databaseUrl: env.DATABASE_URL
+      }) as DatabaseManager;
+    } else {
+      dbManager = createDatabaseManager({ type: 'memory' }) as DatabaseManager;
+    }
+    
     await dbManager.connect();
     await dbManager.createIndexes();
   }
