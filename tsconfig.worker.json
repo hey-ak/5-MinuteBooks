@@ -10,5 +10,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src/worker", "src/shared", "worker-configuration.d.ts"]
+  "include": ["src/worker", "src/shared", "types/**/*"]
 }
