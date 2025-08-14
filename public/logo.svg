@@ -1,0 +1,24 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" fill="#F5C842"/>
+  
+  <!-- Open Book -->
+  <path d="M114 184C114 184 114 184 114 184L114 368C114 384 126 396 142 396L256 396L370 396C386 396 398 384 398 368L398 184C398 184 398 184 398 184" stroke="white" stroke-width="16" fill="none"/>
+  
+  <!-- Book Pages -->
+  <path d="M114 184C114 184 180 140 256 140C332 140 398 184 398 184" stroke="white" stroke-width="16" fill="none"/>
+  <path d="M256 140L256 396" stroke="white" stroke-width="16"/>
+  
+  <!-- Clock Circle -->
+  <circle cx="256" cy="280" r="60" stroke="#F5C842" stroke-width="12" fill="white"/>
+  
+  <!-- Clock Hand -->
+  <path d="M256 240L256 280" stroke="#F5C842" stroke-width="8" stroke-linecap="round"/>
+  
+  <!-- Number 5 -->
+  <text x="290" y="300" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#F5C842">5</text>
+  
+  <!-- Text -->
+  <text x="256" y="450" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">5 MINUTE</text>
+  <text x="256" y="490" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">BOOKS</text>
+</svg>
