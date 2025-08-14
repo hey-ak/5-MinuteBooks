@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useAuth } from '@getmocha/users-service/react';
-import { Shield, Loader2, LogIn } from 'lucide-react';
+import { Loader2, LogIn } from 'lucide-react';
 import Logo from '@/react-app/components/Logo';
 
 export default function AdminLogin() {

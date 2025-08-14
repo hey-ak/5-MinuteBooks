@@ -103,7 +103,7 @@ export function createDatabaseEndpoints(getDbManager: () => Promise<DatabaseMana
 
     } catch (error) {
       console.error('File upload error:', error);
-      return c.json({ error: `Failed to upload file: ${error.message}` }, 500);
+      return c.json({ error: `Failed to upload file: ${error instanceof Error ? error.message : 'Unknown error'}` }, 500);
     }
   });
 

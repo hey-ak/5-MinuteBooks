@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react';
-import { Upload, X, Loader2, File, Image, Music } from 'lucide-react';
-import { apiRequest } from '@/react-app/utils/api';
+import { X, Loader2, File, Image, Music } from 'lucide-react';
 
 interface FileUploadProps {
   accept: string;

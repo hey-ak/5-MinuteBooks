@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router';
 import { useSimpleAuth } from '@/react-app/hooks/useSimpleAuth';
-import { Shield, User, UserPlus, Loader2 } from 'lucide-react';
+import { UserPlus, Loader2 } from 'lucide-react';
 import Logo from '@/react-app/components/Logo';
 
 export default function SignUp() {

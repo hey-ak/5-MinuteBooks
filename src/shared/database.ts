@@ -178,7 +178,7 @@ class SimpleCollection<T extends { id?: number }> implements Collection<T> {
     const data = storage[this.collectionName] || [];
     let results = data.filter(item => this.matchesFilter(item, filter));
     
-    return {
+    const query: CollectionQuery<T> = {
       sort: (sortSpec: Record<string, 1 | -1>) => {
         const sortKey = Object.keys(sortSpec)[0];
         const sortOrder = sortSpec[sortKey];
@@ -192,13 +192,12 @@ class SimpleCollection<T extends { id?: number }> implements Collection<T> {
           return 0;
         });
         
-        return {
-          sort: () => this,
-          toArray: async () => results
-        };
+        return query;
       },
       toArray: async () => results
     };
+    
+    return query;
   }
 
   async findOne(filter: Partial<T>): Promise<T | null> {

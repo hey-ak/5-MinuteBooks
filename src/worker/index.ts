@@ -46,12 +46,9 @@ app.post('/api/auth/signup', async (c) => {
     const db = await getDbManager();
     
     // Check if username or email already exists
-    const existingUsers = await db.userInteractions.find({
-      $or: [
-        { user_id: username },
-        { user_id: email }
-      ]
-    }).toArray();
+    const existingUsersByUsername = await db.userInteractions.find({ user_id: username }).toArray();
+    const existingUsersByEmail = await db.userInteractions.find({ user_id: email }).toArray();
+    const existingUsers = [...existingUsersByUsername, ...existingUsersByEmail];
     
     if (existingUsers.length > 0) {
       return c.json({ error: "Username or email already exists. Please choose different credentials or sign in." }, 409);
@@ -210,8 +207,8 @@ const simpleAdminMiddleware = async (c: any, next: any) => {
 // OAuth endpoints
 app.get('/api/oauth/google/redirect_url', async (c) => {
   const redirectUrl = await getOAuthRedirectUrl('google', {
-    apiUrl: c.env.MOCHA_USERS_SERVICE_API_URL,
-    apiKey: c.env.MOCHA_USERS_SERVICE_API_KEY,
+    apiUrl: c.env.MOCHA_USERS_SERVICE_API_URL || '',
+    apiKey: c.env.MOCHA_USERS_SERVICE_API_KEY || '',
   });
 
   return c.json({ redirectUrl }, 200);
@@ -225,8 +222,8 @@ app.post("/api/sessions", async (c) => {
   }
 
   const sessionToken = await exchangeCodeForSessionToken(body.code, {
-    apiUrl: c.env.MOCHA_USERS_SERVICE_API_URL,
-    apiKey: c.env.MOCHA_USERS_SERVICE_API_KEY,
+    apiUrl: c.env.MOCHA_USERS_SERVICE_API_URL || '',
+    apiKey: c.env.MOCHA_USERS_SERVICE_API_KEY || '',
   });
 
   setCookie(c, MOCHA_SESSION_TOKEN_COOKIE_NAME, sessionToken, {
@@ -249,8 +246,8 @@ app.get('/api/logout', async (c) => {
 
   if (typeof sessionToken === 'string') {
     await deleteSession(sessionToken, {
-      apiUrl: c.env.MOCHA_USERS_SERVICE_API_URL,
-      apiKey: c.env.MOCHA_USERS_SERVICE_API_KEY,
+      apiUrl: c.env.MOCHA_USERS_SERVICE_API_URL || '',
+      apiKey: c.env.MOCHA_USERS_SERVICE_API_KEY || '',
     });
   }
 
